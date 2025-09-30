@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import { Button, Typography, Flex, Layout } from "antd";
+import { ContentStyles } from "@/styles/style";
 
 const { Content } = Layout;
 const { Title } = Typography;
@@ -9,7 +10,7 @@ export default function MainComponent() {
   const [count, setCount] = useState(0);
 
   return (
-    <Content style={{ flex: 1 }}>
+    <Content style={ContentStyles}>
       <Title level={1}>Vite + React</Title>
       <Flex vertical className="card" justify="center">
         <Button onClick={() => setCount((count) => count + 1)}>

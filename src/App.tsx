@@ -1,4 +1,4 @@
-import { Layout } from "antd";
+import { Button, Layout } from "antd";
 import "normalize.css";
 
 import HeaderComponent from "./components/header/Header";
@@ -8,20 +8,34 @@ import FooterComponent from "./components/footer/Footer";
 import { ConfigProvider, theme } from "antd";
 import { customTheme } from "@/lib/theme/theme.ts";
 import { useState } from "react";
+import "./styles/globals.css";
+import { LayoutStyles } from "./styles/style";
 
 function App() {
-  const [themeColor, setThemeColor] = useState<"light" | "dark">("light");
+  const [themeColor, setThemeColor] = useState<"light" | "dark">(
+    (localStorage.getItem("theme") as "light" | "dark") || "light"
+  );
+
+  const toggleTheme = () => {
+    setThemeColor((prev) => {
+      const next = prev === "light" ? "dark" : "light";
+      localStorage.setItem("theme", next);
+      return next;
+    });
+  };
 
   return (
     <ConfigProvider
       theme={{
         algorithm:
           themeColor === "light" ? theme.defaultAlgorithm : theme.darkAlgorithm,
+        cssVar: true,
         ...customTheme,
       }}
     >
-      <Layout style={{ minHeight: "100vh" }}>
+      <Layout style={LayoutStyles}>
         <HeaderComponent />
+        <Button onClick={toggleTheme}>switch theme</Button>
         <MainComponent />
         <FooterComponent />
       </Layout>
