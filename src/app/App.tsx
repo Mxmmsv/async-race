@@ -1,28 +1,19 @@
-import "./styles/globals.css";
 import "normalize.css";
+import "@/styles/globals.css";
 
-import { Button, Layout, ConfigProvider, theme } from "antd";
-import { useState } from "react";
+import { Layout, ConfigProvider, theme } from "antd";
+import { useSelector } from "react-redux";
 
 import FooterComponent from "@/components/footer/Footer";
 import HeaderComponent from "@/components/header/Header";
 import MainComponent from "@/components/main/Main";
+import { getTheme } from "@/lib/store/selectors/themeSelectors";
 import { customTheme } from "@/lib/theme/theme";
 
-import { LayoutStyles } from "./styles/style";
+import { LayoutStyles } from "../styles/style";
 
 function App() {
-  const [themeColor, setThemeColor] = useState<"light" | "dark">(
-    (localStorage.getItem("theme") as "light" | "dark") || "light",
-  );
-
-  const toggleTheme = () => {
-    setThemeColor((prev) => {
-      const next = prev === "light" ? "dark" : "light";
-      localStorage.setItem("theme", next);
-      return next;
-    });
-  };
+  const themeColor = useSelector(getTheme);
 
   return (
     <ConfigProvider
@@ -34,7 +25,6 @@ function App() {
     >
       <Layout style={LayoutStyles}>
         <HeaderComponent />
-        <Button onClick={toggleTheme}>switch theme</Button>
         <MainComponent />
         <FooterComponent />
       </Layout>
