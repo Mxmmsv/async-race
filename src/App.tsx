@@ -1,14 +1,14 @@
-import { Button, Layout } from "antd";
+import "./styles/globals.css";
 import "normalize.css";
 
-import HeaderComponent from "./components/header/Header";
-import MainComponent from "./components/main/Main";
-import FooterComponent from "./components/footer/Footer";
-
-import { ConfigProvider, theme } from "antd";
-import { customTheme } from "@/lib/theme/theme.ts";
+import { Button, Layout, ConfigProvider, theme } from "antd";
 import { useState } from "react";
-import "./styles/globals.css";
+
+import FooterComponent from "@/components/footer/Footer";
+import HeaderComponent from "@/components/header/Header";
+import MainComponent from "@/components/main/Main";
+import { customTheme } from "@/lib/theme/theme";
+
 import { LayoutStyles } from "./styles/style";
 
 function App() {

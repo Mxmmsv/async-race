@@ -1,6 +1,6 @@
+import { Button, Typography, Flex, Layout } from "antd";
 import { useState } from "react";
 
-import { Button, Typography, Flex, Layout } from "antd";
 import { ContentStyles } from "@/styles/style";
 
 const { Content } = Layout;

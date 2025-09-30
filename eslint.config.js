@@ -6,6 +6,7 @@ import tseslint from "typescript-eslint";
 import eslintConfigPrettier from "eslint-config-prettier/flat";
 import prettierPlugin from "eslint-plugin-prettier/recommended";
 import { defineConfig, globalIgnores } from "eslint/config";
+import importPlugin from "eslint-plugin-import";
 
 export default defineConfig([
   globalIgnores(["dist"]),
@@ -16,11 +17,52 @@ export default defineConfig([
       tseslint.configs.recommended,
       reactHooks.configs["recommended-latest"],
       reactRefresh.configs.vite,
+      importPlugin.flatConfigs.recommended,
       prettierPlugin,
     ],
     languageOptions: {
       ecmaVersion: 2020,
       globals: globals.browser,
+    },
+    rules: {
+      "@typescript-eslint/consistent-type-imports": "error",
+      "import/namespace": ["error", { allowComputed: true }],
+      "import/order": [
+        "error",
+        {
+          groups: [
+            "builtin",
+            "external",
+            "internal",
+            "parent",
+            "sibling",
+            "index",
+            "object",
+            "type",
+          ],
+          "newlines-between": "always",
+          pathGroups: [
+            {
+              pattern: "@/**",
+              group: "internal",
+            },
+          ],
+          alphabetize: {
+            order: "asc",
+          },
+        },
+      ],
+    },
+    settings: {
+      react: {
+        version: "detect",
+      },
+      "import/resolver": {
+        typescript: {
+          project: "./tsconfig.json",
+          alwaysTryTypes: true,
+        },
+      },
     },
   },
   eslintConfigPrettier,
