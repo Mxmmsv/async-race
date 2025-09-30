@@ -1,5 +1,6 @@
 import { Button, Typography, Flex, Layout } from "antd";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import { ContentStyles } from "@/styles/style";
 
@@ -8,6 +9,7 @@ const { Title } = Typography;
 
 export default function MainComponent() {
   const [count, setCount] = useState(0);
+  const { t } = useTranslation();
 
   return (
     <Content style={ContentStyles}>
@@ -17,6 +19,7 @@ export default function MainComponent() {
         <p>
           Edit <code>src/App.tsx</code> and save to test HMR
         </p>
+        <h1>{t("welcome.home")}</h1>
       </Flex>
       <p className="read-the-docs">Click on the Vite and React logos to learn more</p>
     </Content>
