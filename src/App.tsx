@@ -13,7 +13,7 @@ import { LayoutStyles } from "./styles/style";
 
 function App() {
   const [themeColor, setThemeColor] = useState<"light" | "dark">(
-    (localStorage.getItem("theme") as "light" | "dark") || "light"
+    (localStorage.getItem("theme") as "light" | "dark") || "light",
   );
 
   const toggleTheme = () => {
@@ -27,8 +27,7 @@ function App() {
   return (
     <ConfigProvider
       theme={{
-        algorithm:
-          themeColor === "light" ? theme.defaultAlgorithm : theme.darkAlgorithm,
+        algorithm: themeColor === "light" ? theme.defaultAlgorithm : theme.darkAlgorithm,
         cssVar: true,
         ...customTheme,
       }}

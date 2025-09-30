@@ -13,16 +13,12 @@ export default function MainComponent() {
     <Content style={ContentStyles}>
       <Title level={1}>Vite + React</Title>
       <Flex vertical className="card" justify="center">
-        <Button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </Button>
+        <Button onClick={() => setCount((count) => count + 1)}>count is {count}</Button>
         <p>
           Edit <code>src/App.tsx</code> and save to test HMR
         </p>
       </Flex>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <p className="read-the-docs">Click on the Vite and React logos to learn more</p>
     </Content>
   );
 }

@@ -6,4 +6,7 @@
   --margin-small: 8px;
   --margin-medium: 16px;
   --margin-large: 24px;
+
+  --border-radius-small: 15px;
+  --border-radius-medium: 30px;
 }
