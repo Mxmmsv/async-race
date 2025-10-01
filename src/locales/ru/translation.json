@@ -1,0 +1,10 @@
+{
+  "route": {
+    "garage": "Гараж",
+    "score": "Очки"
+  },
+  "mainPage": {
+    "aboba": "АБОБА",
+    "abobaSmall": "абоба поменьше"
+  }
+}
