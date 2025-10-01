@@ -1,12 +1,12 @@
 import { getTheme } from "../selectors/themeSelectors";
-import { toggleTheme, setTheme } from "../slice/themeSlice";
+import { toggleTheme } from "../slice/themeSlice";
 
 import type { Middleware } from "@reduxjs/toolkit";
 
 export const themeMiddleware: Middleware = (store) => (next) => (action) => {
   const result = next(action);
 
-  if (toggleTheme.match(action) || setTheme.match(action)) {
+  if (toggleTheme.match(action)) {
     const theme = getTheme(store.getState());
     localStorage.setItem("theme", theme);
   }
