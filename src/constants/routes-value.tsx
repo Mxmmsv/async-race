@@ -24,13 +24,13 @@ export const routesValue: RoutesValue = {
   },
   garage: {
     path: "/garage",
-    label: "Garage",
+    label: "garage",
     icon: <CarOutlined />,
     element: <GarageComponent />,
   },
   score: {
     path: "/score",
-    label: "Score",
+    label: "score",
     icon: <StarOutlined />,
     element: <ScoreComponent />,
   },

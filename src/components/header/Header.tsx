@@ -1,6 +1,7 @@
 import { MoonOutlined, SunOutlined } from "@ant-design/icons";
 import { Button, Flex, Layout, Menu, type MenuProps } from "antd";
 import { useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useLocation } from "react-router";
 
@@ -20,23 +21,34 @@ export default function HeaderComponent() {
   const theme = useSelector(getTheme);
   const translation = useSelector(getTranslation);
   const location = useLocation();
+  const { t } = useTranslation();
 
   const items: MenuItem[] = useMemo(
-    () =>
-      Object.values(routesValue)
-        .filter((route) => route.element)
-        .map((route) => ({
-          label: <NavLink to={route.path}>{route.label}</NavLink>,
-          key: route.path,
-          icon: route.icon,
-        })),
-    [],
+    () => [
+      {
+        key: routesValue.garage.path,
+        label: <NavLink to={routesValue.garage.path}>{t("route.garage")}</NavLink>,
+        icon: routesValue.garage.icon,
+      },
+      {
+        key: routesValue.score.path,
+        label: <NavLink to={routesValue.score.path}>{t("route.score")}</NavLink>,
+        icon: routesValue.score.icon,
+      },
+    ],
+    [t],
   );
 
   return (
     <Header>
       <Flex align="center" justify="space-between" style={{ height: "100%" }}>
-        <Menu theme="dark" selectedKeys={[location.pathname]} mode="horizontal" items={items} />
+        <Menu
+          theme="dark"
+          selectedKeys={[location.pathname]}
+          mode="horizontal"
+          items={items}
+          disabledOverflow
+        />
         <Flex gap={stylesValue.gapSmall}>
           <Button onClick={() => dispatch(toggleTranslation())}>
             {translation === "en" ? "EN" : "RU"}

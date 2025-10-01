@@ -1,5 +1,10 @@
 {
-  "welcome": {
-    "home": "Добро пожаловать React + Vite + i18n!"
+  "route": {
+    "garage": "Гараж",
+    "score": "Очки"
+  },
+  "mainPage": {
+    "aboba": "АБОБА",
+    "abobaSmall": "абоба поменьше"
   }
 }

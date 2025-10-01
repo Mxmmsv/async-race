@@ -5,7 +5,7 @@ import en from "@/locales/en/translation.json";
 import ru from "@/locales/ru/translation.json";
 
 i18n.use(initReactI18next).init({
-  lng: "en",
+  lng: localStorage.getItem("translation") ?? "en",
   fallbackLng: "en",
   debug: import.meta.env.DEV,
   interpolation: { escapeValue: false },

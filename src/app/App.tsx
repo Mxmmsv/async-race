@@ -30,7 +30,11 @@ function App() {
           {Object.values(routesValue)
             .filter((route) => route.element)
             .map((route) => (
-              <Route path={route.path} element={route.element} />
+              <Route
+                key={`route-key-for-${route.label}`}
+                path={route.path}
+                element={route.element}
+              />
             ))}
         </Routes>
         <FooterComponent />
