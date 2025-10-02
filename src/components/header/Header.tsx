@@ -1,5 +1,5 @@
 import { MoonOutlined, SunOutlined } from "@ant-design/icons";
-import { Button, Flex, Layout, Menu, type MenuProps } from "antd";
+import { Button, Flex, Layout, Menu, Typography, type MenuProps } from "antd";
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,6 +15,7 @@ import { toggleTranslation } from "@/lib/store/slice/translationSlice";
 type MenuItem = Required<MenuProps>["items"][number];
 
 const { Header } = Layout;
+const { Title } = Typography;
 
 export default function HeaderComponent() {
   const dispatch = useDispatch();
@@ -27,12 +28,12 @@ export default function HeaderComponent() {
     () => [
       {
         key: routesValue.garage.path,
-        label: <NavLink to={routesValue.garage.path}>{t("route.garage")}</NavLink>,
+        label: <NavLink to={routesValue.garage.path}>{t("message.label.garage")}</NavLink>,
         icon: routesValue.garage.icon,
       },
       {
         key: routesValue.score.path,
-        label: <NavLink to={routesValue.score.path}>{t("route.score")}</NavLink>,
+        label: <NavLink to={routesValue.score.path}>{t("message.label.score")}</NavLink>,
         icon: routesValue.score.icon,
       },
     ],
@@ -49,6 +50,7 @@ export default function HeaderComponent() {
           items={items}
           disabledOverflow
         />
+        <Title level={2}>Async Race</Title>
         <Flex gap={stylesValue.gapSmall}>
           <Button onClick={() => dispatch(toggleTranslation())}>
             {translation === "en" ? "EN" : "RU"}

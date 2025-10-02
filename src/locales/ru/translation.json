@@ -1,10 +1,23 @@
 {
-  "route": {
-    "garage": "Гараж",
-    "score": "Очки"
-  },
   "mainPage": {
-    "aboba": "АБОБА",
-    "abobaSmall": "абоба поменьше"
+    "garage": {
+      "settings": "Настройки"
+    }
+  },
+  "button": {
+    "create": "Создать"
+  },
+  "message": {
+    "label": {
+      "garage": "Гараж",
+      "score": "Счёт",
+      "createNewCar": "Создать новую машинку"
+    },
+    "placeholder": {
+      "createNewCar": "Введите название машинки"
+    },
+    "validation": {
+      "carNameInput": "Пожалуйста, введите название машины!"
+    }
   }
 }

@@ -1,10 +1,23 @@
 {
-  "route": {
-    "garage": "Garage",
-    "score": "Score"
-  },
   "mainPage": {
-    "aboba": "ABOBA",
-    "abobaSmall": "aboba pomenshe"
+    "garage": {
+      "settings": "Settigns"
+    }
+  },
+  "button": {
+    "create": "Create"
+  },
+  "message": {
+    "label": {
+      "garage": "Garage",
+      "score": "Score",
+      "createNewCar": "Create new car"
+    },
+    "placeholder": {
+      "createNewCar": "Enter car name"
+    },
+    "validation": {
+      "carNameInput": "Please, enter car name!"
+    }
   }
 }

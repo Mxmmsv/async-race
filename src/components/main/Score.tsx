@@ -1,13 +1,16 @@
-import { Layout, Typography } from "antd";
+import { Divider, Layout, Typography } from "antd";
 import { useTranslation } from "react-i18next";
 
 const { Content } = Layout;
+const { Title } = Typography;
 
 export default function ScoreComponent() {
   const { t } = useTranslation();
   return (
     <Content>
-      <Typography.Paragraph>{t("mainPage.abobaSmall")}</Typography.Paragraph>
+      <Divider>
+        <Title level={2}>{t("message.label.score")}</Title>
+      </Divider>
     </Content>
   );
 }
