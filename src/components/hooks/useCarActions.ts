@@ -1,4 +1,5 @@
 import { notification } from "antd";
+import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 
 import type { CarValue } from "@/components/types/types";
@@ -9,6 +10,7 @@ export function useCarActions() {
   const dispatch = useDispatch();
   const cars = useSelector(getCars);
   const car = useSelector(getCar);
+  const { t } = useTranslation();
 
   const addNewCarWithNotification = (carData: CarValue) => {
     const exist = cars.some(
@@ -16,7 +18,7 @@ export function useCarActions() {
     );
 
     if (exist) {
-      notification.info({ message: "Car already exists!" });
+      notification.info({ message: t("message.notification.info.carExist") });
       return;
     }
 
@@ -26,22 +28,28 @@ export function useCarActions() {
     };
 
     dispatch(addNewCar(newCar));
-    notification.success({ message: "Car added successfully!" });
+    notification.success({ message: t("message.notification.success.carAdd") });
   };
 
   const updateCarWithNotification = (carData: CarValue) => {
     if (!car) {
-      notification.error({ message: "Car is not selected!" });
+      notification.error({ message: t("message.notification.error.carIsNotSelected") });
       return;
     }
 
-    const updatedCar = {
-      ...carData,
-      id: car.id,
-    };
+    const carState = cars.find((item) => item.id === carData.id);
+    if (!carState) {
+      notification.error({ message: t("message.notification.error.notFound") });
+      return;
+    }
 
-    dispatch(updateCar(updatedCar));
-    notification.success({ message: "Car updated successfully!" });
+    if (carState.carName === carData.carName && carState.carColor === carData.carColor) {
+      notification.info({ message: t("message.notification.info.carNoChange") });
+      return;
+    }
+
+    dispatch(updateCar(carData));
+    notification.success({ message: t("message.notification.success.carUpdate") });
   };
 
   return { addNewCarWithNotification, updateCarWithNotification };

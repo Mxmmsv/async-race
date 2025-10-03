@@ -29,7 +29,7 @@ export const carsSlice = createSlice({
       );
 
       if (state.selectedCar?.id === id) {
-        state.selectedCar = { id, ...updatedFields } as CarValue;
+        state.selectedCar = null;
       }
     },
     selectCarId: (state, action: PayloadAction<Pick<CarValue, "id">>) => {

@@ -10,6 +10,20 @@
     "selectCar": "Select car"
   },
   "message": {
+    "notification": {
+      "info": {
+        "carExist": "Car already exists!",
+        "carNoChange": "No changes detected"
+      },
+      "success": {
+        "carAdd": "Car added successfully!",
+        "carUpdate": "Car updated successfully!"
+      },
+      "error": {
+        "carIsNotSelected": "Car is not selected!",
+        "notFound": "Car not found!"
+      }
+    },
     "title": {
       "head": "Async Race"
     },

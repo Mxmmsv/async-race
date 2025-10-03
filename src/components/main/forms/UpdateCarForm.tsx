@@ -26,6 +26,7 @@ export default function UpdateCarForm() {
       fields={
         car
           ? [
+              { name: ["id"], value: car.id },
               { name: ["carName"], value: car.carName },
               { name: ["carColor"], value: car.carColor },
             ]
@@ -60,6 +61,9 @@ export default function UpdateCarForm() {
             <ColorPicker showText format="hex" style={{ width: "100%" }} />
           </Item>
         </Col>
+        <Item name="id" hidden>
+          <Input />
+        </Item>
         <Col span={4}>
           <Item>
             <Button htmlType="submit" style={{ width: "100%" }}>
