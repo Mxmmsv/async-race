@@ -10,6 +10,9 @@
     "selectCar": "Выбрать машинку"
   },
   "message": {
+    "title": {
+      "head": "Асинхронные гонки"
+    },
     "label": {
       "garage": "Гараж",
       "score": "Счёт",

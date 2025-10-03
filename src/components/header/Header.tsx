@@ -50,7 +50,9 @@ export default function HeaderComponent() {
           items={items}
           disabledOverflow
         />
-        <Title level={2}>Async Race</Title>
+        <Title level={2} style={{ color: "white" }}>
+          {t("message.title.head")}
+        </Title>
         <Flex gap={stylesValue.gapSmall}>
           <Button onClick={() => dispatch(toggleTranslation())}>
             {translation === "en" ? "EN" : "RU"}

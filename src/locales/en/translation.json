@@ -10,6 +10,9 @@
     "selectCar": "Select car"
   },
   "message": {
+    "title": {
+      "head": "Async Race"
+    },
     "label": {
       "garage": "Garage",
       "score": "Score",
