@@ -5,16 +5,20 @@
     }
   },
   "button": {
-    "create": "Create"
+    "create": "Create",
+    "update": "Update",
+    "selectCar": "Select car"
   },
   "message": {
     "label": {
       "garage": "Garage",
       "score": "Score",
-      "createNewCar": "Create new car"
+      "createNewCar": "Create new car",
+      "updateCar": "Update car"
     },
     "placeholder": {
-      "createNewCar": "Enter car name"
+      "createNewCar": "Enter car name",
+      "updateCarName": "Update car name"
     },
     "validation": {
       "carNameInput": "Please, enter car name!"

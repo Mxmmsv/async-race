@@ -1,15 +1,17 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
-import type { CarValue } from "@/components/main/forms/types";
+import type { CarValue } from "@/components/types/types";
 
 export type CarsState = {
   cars: CarValue[];
+  selectedCar: CarValue | null;
 };
 
 const carsFromLS = localStorage.getItem("cars");
 
 const initialState: CarsState = {
   cars: carsFromLS ? (JSON.parse(carsFromLS) as CarValue[]) : [],
+  selectedCar: null,
 };
 
 export const carsSlice = createSlice({
@@ -17,17 +19,26 @@ export const carsSlice = createSlice({
   initialState,
   reducers: {
     addNewCar: (state, action: PayloadAction<CarValue>) => {
-      const exists = state.cars.some(
-        (car) => car.carName === action.payload.carName && car.carColor === action.payload.carColor,
+      state.cars.push(action.payload);
+    },
+    updateCar: (state, action: PayloadAction<CarValue>) => {
+      const { id, ...updatedFields } = action.payload;
+
+      state.cars = state.cars.map((item) =>
+        item.id === id ? { ...item, ...updatedFields } : item,
       );
 
-      if (!exists) {
-        state.cars.push(action.payload);
+      if (state.selectedCar?.id === id) {
+        state.selectedCar = { id, ...updatedFields } as CarValue;
       }
+    },
+    selectCarId: (state, action: PayloadAction<Pick<CarValue, "id">>) => {
+      const { id } = action.payload;
+      state.selectedCar = state.cars.find((car) => car.id === id) || null;
     },
   },
 });
 
-export const { addNewCar } = carsSlice.actions;
+export const { addNewCar, updateCar, selectCarId } = carsSlice.actions;
 
 export default carsSlice.reducer;

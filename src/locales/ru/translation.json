@@ -5,16 +5,20 @@
     }
   },
   "button": {
-    "create": "Создать"
+    "create": "Создать",
+    "update": "Обновить",
+    "selectCar": "Выбрать машинку"
   },
   "message": {
     "label": {
       "garage": "Гараж",
       "score": "Счёт",
-      "createNewCar": "Создать новую машинку"
+      "createNewCar": "Создать новую машинку",
+      "updateCar": "Обновить машинку"
     },
     "placeholder": {
-      "createNewCar": "Введите название машинки"
+      "createNewCar": "Введите название машинки",
+      "updateCarName": "Обновите название машинки"
     },
     "validation": {
       "carNameInput": "Пожалуйста, введите название машины!"
