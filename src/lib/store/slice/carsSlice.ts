@@ -32,13 +32,21 @@ export const carsSlice = createSlice({
         state.selectedCar = null;
       }
     },
-    selectCarId: (state, action: PayloadAction<Pick<CarValue, "id">>) => {
+    selectCarWithId: (state, action: PayloadAction<Pick<CarValue, "id">>) => {
       const { id } = action.payload;
       state.selectedCar = state.cars.find((car) => car.id === id) || null;
+    },
+    removeCarWithId: (state, action: PayloadAction<Pick<CarValue, "id">>) => {
+      const { id } = action.payload;
+      state.cars = state.cars.filter((car) => car.id !== id);
+    },
+    removeAllCar: (state) => {
+      state.cars = [];
     },
   },
 });
 
-export const { addNewCar, updateCar, selectCarId } = carsSlice.actions;
+export const { addNewCar, updateCar, selectCarWithId, removeCarWithId, removeAllCar } =
+  carsSlice.actions;
 
 export default carsSlice.reducer;

@@ -7,7 +7,8 @@
   "button": {
     "create": "Create",
     "update": "Update",
-    "selectCar": "Select car"
+    "selectCar": "Select car",
+    "removeCar": "Remove car"
   },
   "message": {
     "notification": {

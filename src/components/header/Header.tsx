@@ -5,8 +5,8 @@ import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useLocation } from "react-router";
 
-import { routesValue } from "@/constants/routes-value";
-import { stylesValue } from "@/constants/styles-value";
+import { routesValue } from "@/constants/routesValue";
+import { stylesValue } from "@/constants/stylesValue";
 import { getTranslation } from "@/lib/store/selectors/i18nSelectors";
 import { getTheme } from "@/lib/store/selectors/themeSelectors";
 import { toggleTheme } from "@/lib/store/slice/themeSlice";

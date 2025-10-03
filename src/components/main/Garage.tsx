@@ -2,7 +2,7 @@ import { Layout, Divider, Flex, Typography, Card } from "antd";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 
-import { stylesValue } from "@/constants/styles-value";
+import { stylesValue } from "@/constants/stylesValue";
 import { getCars } from "@/lib/store/selectors/carsSelector";
 
 import CreateCarForm from "./forms/CreateCarForm";

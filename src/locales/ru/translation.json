@@ -7,7 +7,8 @@
   "button": {
     "create": "Создать",
     "update": "Обновить",
-    "selectCar": "Выбрать машинку"
+    "selectCar": "Выбрать машинку",
+    "removeCar": "Удалить машинку"
   },
   "message": {
     "notification": {

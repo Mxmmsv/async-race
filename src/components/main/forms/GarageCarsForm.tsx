@@ -2,9 +2,9 @@ import { Card, Flex, Typography, Button } from "antd";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 
-import { stylesValue } from "@/constants/styles-value";
+import { stylesValue } from "@/constants/stylesValue";
 import { getCars } from "@/lib/store/selectors/carsSelector";
-import { selectCarId } from "@/lib/store/slice/carsSlice";
+import { removeCarWithId, selectCarWithId } from "@/lib/store/slice/carsSlice";
 
 export default function GarageCarsForm() {
   const cars = useSelector(getCars);
@@ -12,16 +12,21 @@ export default function GarageCarsForm() {
   const { t } = useTranslation();
 
   const handleSelect = (id: string) => {
-    dispatch(selectCarId({ id }));
+    dispatch(selectCarWithId({ id }));
+  };
+
+  const handleRemove = (id: string) => {
+    dispatch(removeCarWithId({ id }));
   };
 
   return (
     <Flex vertical gap={8}>
       {cars.map((car, index) => (
         <Card key={`car-${car.carName}-${car.carColor}-${index}`} size="small">
-          <Flex gap={stylesValue.gapSmall}>
-            <Flex>
+          <Flex gap={stylesValue.gapSmall} vertical>
+            <Flex gap={stylesValue.gapSmall}>
               <Button onClick={() => handleSelect(car.id)}>{t("button.selectCar")}</Button>
+              <Button onClick={() => handleRemove(car.id)}>{t("button.removeCar")}</Button>
             </Flex>
             <Flex align="center" justify="space-between">
               <Typography.Paragraph
