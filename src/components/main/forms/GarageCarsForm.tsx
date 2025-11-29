@@ -1,4 +1,4 @@
-import { Card, Flex, Typography, Button } from "antd";
+import { Card, Flex, Typography, Button, Pagination } from "antd";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -21,12 +21,15 @@ export default function GarageCarsForm() {
 
   return (
     <Flex vertical gap={8}>
+      <Pagination align="center" defaultCurrent={1} total={10} />
       {cars.map((car, index) => (
         <Card key={`car-${car.carName}-${car.carColor}-${index}`} size="small">
           <Flex gap={stylesValue.gapSmall} vertical>
             <Flex gap={stylesValue.gapSmall}>
               <Button onClick={() => handleSelect(car.id)}>{t("button.selectCar")}</Button>
-              <Button onClick={() => handleRemove(car.id)}>{t("button.removeCar")}</Button>
+              <Button danger onClick={() => handleRemove(car.id)}>
+                {t("button.removeCar")}
+              </Button>
             </Flex>
             <Flex align="center" justify="space-between">
               <Typography.Paragraph

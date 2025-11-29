@@ -8,7 +8,10 @@
     "create": "Создать",
     "update": "Обновить",
     "selectCar": "Выбрать машинку",
-    "removeCar": "Удалить машинку"
+    "removeCar": "Удалить машинку",
+    "removeAllCars": "Удалить все машинки",
+    "generateCars": "Создать 100 машинок",
+    "startRace": "Старт гонки!"
   },
   "message": {
     "notification": {
