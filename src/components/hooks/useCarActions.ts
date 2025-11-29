@@ -3,8 +3,10 @@ import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 
 import type { CarValue } from "@/components/types/types";
+import { oneHundredCars } from "@/constants/oneHundredCars";
 import { getCar, getCars } from "@/lib/store/selectors/carsSelector";
 import { addNewCar, updateCar } from "@/lib/store/slice/carsSlice";
+import { randomHex } from "@/utils/colorGenerator";
 
 export function useCarActions() {
   const dispatch = useDispatch();
@@ -24,7 +26,7 @@ export function useCarActions() {
 
     const newCar = {
       ...carData,
-      id: Date.now().toString(36),
+      id: Date.now().toString(36) + Math.random().toString(36),
     };
 
     dispatch(addNewCar(newCar));
@@ -52,5 +54,14 @@ export function useCarActions() {
     notification.success({ message: t("message.notification.success.carUpdate") });
   };
 
-  return { addNewCarWithNotification, updateCarWithNotification };
+  const createOneHundredCars = () => {
+    for (let i = 0; i < 100; i++) {
+      addNewCarWithNotification({
+        carName: oneHundredCars[i],
+        carColor: randomHex(),
+      } as CarValue);
+    }
+  };
+
+  return { addNewCarWithNotification, updateCarWithNotification, createOneHundredCars };
 }
