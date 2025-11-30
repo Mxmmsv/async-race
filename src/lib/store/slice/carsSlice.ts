@@ -19,7 +19,7 @@ export const carsSlice = createSlice({
   initialState,
   reducers: {
     addNewCar: (state, action: PayloadAction<CarValue>) => {
-      state.cars.push(action.payload);
+      state.cars = [action.payload, ...state.cars];
     },
     updateCar: (state, action: PayloadAction<CarValue>) => {
       const { id, ...updatedFields } = action.payload;
