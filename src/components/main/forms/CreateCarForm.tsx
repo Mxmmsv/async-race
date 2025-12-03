@@ -20,7 +20,7 @@ export default function CreateCarForm() {
       <Row gutter={8}>
         <Col span={16}>
           <Item
-            name="carName"
+            name="name"
             label={t("message.label.createNewCar")}
             rules={[
               {
@@ -35,7 +35,7 @@ export default function CreateCarForm() {
         </Col>
         <Col span={4}>
           <Item
-            name="carColor"
+            name="color"
             initialValue="#108ee9"
             rules={[{ required: true }]}
             getValueFromEvent={(color) => color.toHexString()}

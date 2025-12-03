@@ -27,8 +27,8 @@ export default function UpdateCarForm() {
         car
           ? [
               { name: ["id"], value: car.id },
-              { name: ["carName"], value: car.carName },
-              { name: ["carColor"], value: car.carColor },
+              { name: ["carName"], value: car.name },
+              { name: ["carColor"], value: car.color },
             ]
           : []
       }
@@ -48,7 +48,7 @@ export default function UpdateCarForm() {
           >
             <Input
               placeholder={t("message.placeholder.updateCarName")}
-              prefix={<CarOutlined style={{ color: car?.carColor }} />}
+              prefix={<CarOutlined style={{ color: car?.color }} />}
             />
           </Item>
         </Col>

@@ -1,6 +1,6 @@
 export type CarValue = {
   id: string;
-  carName: string;
-  carColor: string;
+  name: string;
+  color: string;
   wins: number;
 };

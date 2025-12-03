@@ -15,9 +15,7 @@ export function useCarActions() {
   const { t } = useTranslation();
 
   const addNewCarWithNotification = (carData: CarValue) => {
-    const exist = cars.some(
-      (car) => car.carName === carData.carName && car.carColor === carData.carColor,
-    );
+    const exist = cars.some((car) => car.name === carData.name && car.color === carData.color);
 
     if (exist) {
       notification.info({ message: t("message.notification.info.carExist") });
@@ -45,7 +43,7 @@ export function useCarActions() {
       return;
     }
 
-    if (carState.carName === carData.carName && carState.carColor === carData.carColor) {
+    if (carState.name === carData.name && carState.color === carData.color) {
       notification.info({ message: t("message.notification.info.carNoChange") });
       return;
     }
@@ -57,8 +55,8 @@ export function useCarActions() {
   const createOneHundredCars = () => {
     for (let i = 0; i < 100; i++) {
       addNewCarWithNotification({
-        carName: oneHundredCars[i],
-        carColor: randomHex(),
+        name: oneHundredCars[i],
+        color: randomHex(),
       } as CarValue);
     }
   };
