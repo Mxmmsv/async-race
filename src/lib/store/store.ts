@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 
-import { carsMiddleware } from "./middleware/carsMiddleware";
+import { carsApi } from "./api/carsApi";
 import { themeMiddleware } from "./middleware/themeMiddleware";
 import { translationMiddleware } from "./middleware/translationMiddleware";
 import carsSlice from "./slice/carsSlice";
@@ -12,9 +12,10 @@ export const store = configureStore({
     theme: themeReducer,
     translation: translationSlice,
     cars: carsSlice,
+    [carsApi.reducerPath]: carsApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(themeMiddleware, translationMiddleware, carsMiddleware),
+    getDefaultMiddleware().concat(themeMiddleware, translationMiddleware, carsApi.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

@@ -1,54 +1,32 @@
 import { notification } from "antd";
 import { useTranslation } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
-import type { CarValue } from "@/components/types/types";
+import type { CarValue, CreateCarFormValue } from "@/components/types/types";
 import { oneHundredCars } from "@/constants/oneHundredCars";
-import { getCar, getCars } from "@/lib/store/selectors/carsSelector";
-import { addNewCar, updateCar } from "@/lib/store/slice/carsSlice";
+import { useCreateCarMutation, useUpdateCarMutation } from "@/lib/store/api/carsApi";
+import { getCar } from "@/lib/store/selectors/carsSelector";
 import { randomHex } from "@/utils/colorGenerator";
 
 export function useCarActions() {
-  const dispatch = useDispatch();
-  const cars = useSelector(getCars);
   const car = useSelector(getCar);
   const { t } = useTranslation();
 
-  const addNewCarWithNotification = (carData: CarValue) => {
-    const exist = cars.some((car) => car.name === carData.name && car.color === carData.color);
+  const [createCar] = useCreateCarMutation();
+  const [updateCar] = useUpdateCarMutation();
 
-    if (exist) {
-      notification.info({ message: t("message.notification.info.carExist") });
-      return;
-    }
-
-    const newCar = {
-      ...carData,
-      id: Date.now().toString(36) + Math.random().toString(36),
-    };
-
-    dispatch(addNewCar(newCar));
+  const addNewCarWithNotification = (carData: CreateCarFormValue) => {
+    createCar({ ...carData, wins: 0 });
     notification.success({ message: t("message.notification.success.carAdd") });
   };
 
   const updateCarWithNotification = (carData: CarValue) => {
-    if (!car) {
-      notification.error({ message: t("message.notification.error.carIsNotSelected") });
-      return;
-    }
-
-    const carState = cars.find((item) => item.id === carData.id);
-    if (!carState) {
-      notification.error({ message: t("message.notification.error.notFound") });
-      return;
-    }
-
-    if (carState.name === carData.name && carState.color === carData.color) {
+    if (car?.name === carData.name && car.color === carData.color) {
       notification.info({ message: t("message.notification.info.carNoChange") });
       return;
     }
 
-    dispatch(updateCar(carData));
+    updateCar(carData);
     notification.success({ message: t("message.notification.success.carUpdate") });
   };
 

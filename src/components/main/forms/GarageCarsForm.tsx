@@ -1,49 +1,94 @@
-import { Card, Flex, Typography, Button, Pagination } from "antd";
+import { Card, Flex, Typography, Button, Pagination, Skeleton, Divider } from "antd";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
+import type { CarValue } from "@/components/types/types";
+import { CARS_PER_PAGE } from "@/constants/env";
 import { stylesValue } from "@/constants/stylesValue";
-import { getCars } from "@/lib/store/selectors/carsSelector";
-import { removeCarWithId, selectCarWithId } from "@/lib/store/slice/carsSlice";
+import { useGetCarsQuery, useRemoveCarWithIdMutation } from "@/lib/store/api/carsApi";
+import { selectCar } from "@/lib/store/slice/carsSlice";
+import type { AppDispatch } from "@/lib/store/store";
+
+const { Title, Paragraph } = Typography;
 
 export default function GarageCarsForm() {
-  const cars = useSelector(getCars);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const { t } = useTranslation();
+  const [remove] = useRemoveCarWithIdMutation();
 
-  const handleSelect = (id: string) => {
-    dispatch(selectCarWithId({ id }));
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const { data, isLoading } = useGetCarsQuery({ page: currentPage, limit: CARS_PER_PAGE });
+
+  const cars = data?.cars || [];
+  const totalCount = data?.totalCount || 0;
+
+  const handleSelect = (car: CarValue) => {
+    dispatch(selectCar(car));
   };
 
-  const handleRemove = (id: string) => {
-    dispatch(removeCarWithId({ id }));
+  const handleRemove = (id: number) => {
+    remove({ id });
   };
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
+
+  // if (error) {
+  //   return <Alert message={error} type="error" />;
+  // }
 
   return (
     <Flex vertical gap={8}>
-      <Pagination align="center" defaultCurrent={1} total={10} />
-      {cars.map((car, index) => (
-        <Card key={`car-${car.carName}-${car.carColor}-${index}`} size="small">
-          <Flex gap={stylesValue.gapSmall} vertical>
-            <Flex gap={stylesValue.gapSmall}>
-              <Button onClick={() => handleSelect(car.id)}>{t("button.selectCar")}</Button>
-              <Button danger onClick={() => handleRemove(car.id)}>
-                {t("button.removeCar")}
-              </Button>
-            </Flex>
-            <Flex align="center" justify="space-between">
-              <Typography.Paragraph
-                style={{
-                  color: car.carColor,
-                  margin: 0,
-                }}
-              >
-                {car.carName}
-              </Typography.Paragraph>
-            </Flex>
-          </Flex>
+      <Divider>
+        <Title>{t("message.label.garage") + ` (${totalCount})`}</Title>
+      </Divider>
+      <Pagination
+        align="center"
+        current={currentPage}
+        total={totalCount || 0}
+        pageSize={CARS_PER_PAGE}
+        onChange={handlePageChange}
+        showSizeChanger={false}
+      />
+      {isLoading ? (
+        <Card size="small">
+          <Skeleton active paragraph={{ rows: 1 }} />
         </Card>
-      ))}
+      ) : (
+        cars.map((car, index) => (
+          <Card key={`car-${car.name}-${car.color}-${index}`} size="small">
+            <Flex gap={stylesValue.gapSmall} vertical>
+              <Flex gap={stylesValue.gapSmall}>
+                <Button onClick={() => handleSelect(car)}>{t("button.selectCar")}</Button>
+                <Button danger onClick={() => handleRemove(car.id)}>
+                  {t("button.removeCar")}
+                </Button>
+              </Flex>
+              <Flex align="center" justify="space-between">
+                <Paragraph
+                  style={{
+                    color: car.color,
+                    margin: 0,
+                  }}
+                >
+                  {car.name}
+                </Paragraph>
+              </Flex>
+            </Flex>
+          </Card>
+        ))
+      )}
+      <Pagination
+        align="center"
+        current={currentPage}
+        total={totalCount || 0}
+        pageSize={CARS_PER_PAGE}
+        onChange={handlePageChange}
+        showSizeChanger={false}
+      />
     </Flex>
   );
 }

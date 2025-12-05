@@ -3,7 +3,7 @@ import { Input, ColorPicker, Button, Form, Row, Col } from "antd";
 import { useTranslation } from "react-i18next";
 
 import { useCarActions } from "@/components/hooks/useCarActions";
-import type { CarValue } from "@/components/types/types";
+import type { CreateCarFormValue } from "@/components/types/types";
 
 const { Item } = Form;
 
@@ -11,7 +11,7 @@ export default function CreateCarForm() {
   const { t } = useTranslation();
   const { addNewCarWithNotification } = useCarActions();
 
-  const handleFinish = (formData: CarValue) => {
+  const handleFinish = (formData: CreateCarFormValue) => {
     addNewCarWithNotification(formData);
   };
 

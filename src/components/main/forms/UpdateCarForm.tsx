@@ -27,8 +27,8 @@ export default function UpdateCarForm() {
         car
           ? [
               { name: ["id"], value: car.id },
-              { name: ["carName"], value: car.name },
-              { name: ["carColor"], value: car.color },
+              { name: ["name"], value: car.name },
+              { name: ["color"], value: car.color },
             ]
           : []
       }
@@ -36,7 +36,7 @@ export default function UpdateCarForm() {
       <Row gutter={8}>
         <Col span={16}>
           <Item
-            name="carName"
+            name="name"
             label={t("message.label.updateCar")}
             rules={[
               {
@@ -53,11 +53,7 @@ export default function UpdateCarForm() {
           </Item>
         </Col>
         <Col span={4}>
-          <Item
-            name="carColor"
-            initialValue="#FFF"
-            getValueFromEvent={(color) => color.toHexString()}
-          >
+          <Item name="color" initialValue="#FFF" getValueFromEvent={(color) => color.toHexString()}>
             <ColorPicker showText format="hex" style={{ width: "100%" }} />
           </Item>
         </Col>
