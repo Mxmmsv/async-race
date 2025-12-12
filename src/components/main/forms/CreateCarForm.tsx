@@ -1,5 +1,6 @@
 import { CarOutlined } from "@ant-design/icons";
 import { Input, ColorPicker, Button, Form, Row, Col } from "antd";
+import debounce from "debounce";
 import { useTranslation } from "react-i18next";
 
 import { useCarActions } from "@/components/hooks/useCarActions";
@@ -11,9 +12,9 @@ export default function CreateCarForm() {
   const { t } = useTranslation();
   const { addNewCarWithNotification } = useCarActions();
 
-  const handleFinish = (formData: CreateCarFormValue) => {
+  const handleFinish = debounce((formData: CreateCarFormValue) => {
     addNewCarWithNotification(formData);
-  };
+  }, 300);
 
   return (
     <Form onFinish={handleFinish} layout="horizontal">
